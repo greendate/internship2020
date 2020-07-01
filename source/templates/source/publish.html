@@ -1,0 +1,21 @@
+{% load static %}
+<html>
+  <head>
+    <title> internship </title>
+  </head>
+  <body>
+    <h1> New article </h1>
+    {% if user.is_authenticated %}
+      <form class="feedback-section" action="" method="post">
+          {% csrf_token %}
+          <p> {{ form.name }} </p>
+          <p> {{ form.price }} </p>
+          <p> {{ form.cover }} </p>
+          <p> {{ form.description }} </p>
+          <p> {{ form.type }} </p>
+          <p> <input type="submit" value="Publish"> </p>
+      </form>
+      <a href = "/"> Discard </a>
+    {% endif %}
+  </body>
+</html>
