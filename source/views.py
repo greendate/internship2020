@@ -2,9 +2,35 @@ from django.shortcuts import render, redirect
 from .forms import UserEditForm, UploadBookForm, CommentForm
 from .models import UserInfo, Book, Comment, Interested
 
+types = [ [1, 'Action and adventure'],
+    [2, 'Art/architecture'],
+    [3, 'Autobiography'],
+    [4, 'Business/economics'],
+    [5, 'Classic'],
+    [6, 'Cookbook'],
+    [7, 'Dictionary'],
+    [8, 'Crime'],
+    [9, 'Encyclopedia'],
+    [10, 'Drama'],
+    [11, 'Guide'],
+    [12, 'Fairytale'],
+    [13, 'Health/fitness'],
+    [14, 'Fantasy'],
+    [15, 'History'],
+    [16, 'Humor'],
+    [17, 'Horror'],
+    [18, 'Journal'],
+    [19, 'Mystery'],
+]
 
 def index(request):
-    return render(request, 'source/index.html', {})
+    if request.method == 'POST':
+         type = request.POST.get('types')
+         print(type)
+         books = Book.objects.filter(type=type)
+         return render(request, 'source/index.html', {'books': books, 'types': types})
+    books = Book.objects.all()
+    return render(request, 'source/index.html', {'books': books, 'types': types})
 
 
 def edit(request):

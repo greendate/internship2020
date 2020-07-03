@@ -4,5 +4,23 @@
   </head>
   <body>
     <h1> internship </h1>
+    <form class="feedback-section" action="" method="post">
+      {% csrf_token %}
+      <select name="types" id="types">
+      {% for type in types %}
+          <option value="{{type.0}}">{{type.1}}</option>
+       {% endfor %}
+       </select>
+      <p> <input type="submit" value="refresh"> </p>
+    </form>
+    <a href = "/"> remove tags </a>
+    {% for book in books %}
+      <p> {{ book.name }} </p>
+      <p> <img src = "{{ book.cover }} "> </p>
+      <p> {{ book.price }}$ </p>
+      <p> Published by: {{ book.owner }} </p>
+      <p> {{ book.description }} </p>
+      <hr>
+    {% endfor %}
   </body>
 </html>
