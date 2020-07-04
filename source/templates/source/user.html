@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <title> internship </title>
+  </head>
+  <body>
+    <h1> My Books: {{ user }} </h1>
+    {% for book in books %}
+      <p> {{ book.name }} by {{ book.author }} </p>
+      <p> <img src = "{{ book.cover }} "> </p>
+      <p> {{ book.price }}$ </p>
+      <p> Published by: {{ book.owner }} </p>
+      <p> {{ book.description }} </p>
+      <hr>
+    {% endfor %}
+  </body>
+</html>

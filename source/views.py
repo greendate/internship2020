@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import UserEditForm, UploadBookForm, CommentForm
 from .models import UserInfo, Book, Comment, Interested
+from django.contrib.auth.models import User
 
 types = [ [1, 'Action and adventure'],
     [2, 'Art/architecture'],
@@ -22,6 +23,23 @@ types = [ [1, 'Action and adventure'],
     [18, 'Journal'],
     [19, 'Mystery'],
 ]
+
+
+def my(request):
+    books = Book.objects.filter(owner=request.user)
+    return render(request, 'source/mybooks.html', {'books': books, 'user': request.user})
+
+
+def delete(request, identity):
+    Book.objects.filter(id=identity).delete()
+    return redirect("my")
+
+
+def user(request, identity):
+    books = Book.objects.filter(owner_id=identity)
+    user = User.objects.get(id=identity).username
+    return render(request, 'source/user.html', {'books': books, 'user': user})
+
 
 def index(request):
     if request.method == 'POST':
@@ -71,6 +89,7 @@ def publish(request):
         form = UploadBookForm(request.POST)
 
         book_inst.name = form.data["name"]
+        book_inst.author = form.data["author"]
         book_inst.price = form.data["price"]
         book_inst.cover = form.data["cover"]
         book_inst.owner = request.user

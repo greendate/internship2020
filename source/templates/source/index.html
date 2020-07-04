@@ -15,7 +15,7 @@
     </form>
     <a href = "/"> remove tags </a>
     {% for book in books %}
-      <p> {{ book.name }} </p>
+      <p> {{ book.name }} by {{ book.author }} </p>
       <p> <img src = "{{ book.cover }} "> </p>
       <p> {{ book.price }}$ </p>
       <p> Published by: {{ book.owner }} </p>

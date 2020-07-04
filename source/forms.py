@@ -40,10 +40,11 @@ class UploadBookForm(forms.ModelForm):
 
     class Meta:
         model = Book
-        fields = ('name', 'price', 'cover', 'description', 'type')
+        fields = ('name', 'author', 'price', 'cover', 'description', 'type')
         type = ChoiceField(widget=RadioSelect, choices = TYPE_CHOICES)
         widgets = {
             'name': TextInput(attrs={'id': 'name', 'placeholder': 'Book Title'}),
+            'author': TextInput(attrs={'id': 'author', 'placeholder': 'Author'}),
             'cover': TextInput(attrs={'id': 'cover_url', 'placeholder': 'https://'}),
             'price': NumberInput(attrs={'id': 'price', 'step': "0.1"}),
             'description': Textarea(attrs={'id': 'description', 'placeholder': 'Short description..'}),

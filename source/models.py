@@ -10,6 +10,7 @@ class UserInfo(models.Model):
 
 class Book(models.Model):
     name = models.CharField(max_length=100)
+    author = models.CharField(max_length=50)
     price = models.FloatField()
     cover = models.CharField(max_length=500)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -9,6 +9,7 @@
       <form class="feedback-section" action="" method="post">
           {% csrf_token %}
           <p> {{ form.name }} </p>
+          <p> {{ form.author }} </p>
           <p> {{ form.price }} </p>
           <p> {{ form.cover }} </p>
           <p> {{ form.description }} </p>
