@@ -133,3 +133,18 @@ def recommended(request):
          for book in books:
              rec_books.append(book)
     return render(request, 'source/recommended.html', {'books': rec_books})
+
+
+def book(request, book_id):
+    if request.method == 'POST':
+        comment = Comment()
+        form = CommentForm(request.POST)
+        comment.user = request.user
+        comment.book = Book.objects.get(id=book_id)
+        comment.text = form.data["text"]
+        comment.save()
+        return redirect(request.path_info)
+    book = Book.objects.get(id=book_id)
+    form = CommentForm(request.POST)
+    comments = Comment.objects.filter(book_id=book_id)
+    return render(request, "source/book.html", {'book': book, 'form': form, 'comments': comments})

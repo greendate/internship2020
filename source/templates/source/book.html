@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title> internship </title>
+  </head>
+  <body>
+    <h1>  {{ book.name }} </h1>
+    <p> by {{ book.author }} </p>
+    <p> <img src = "{{ book.cover }} "> </p>
+    <p> {{ book.price }}$ </p>
+    <p> Published by: {{ book.owner }} </p>
+    <p> {{ book.description }} </p>
+    {% if user.is_authenticated %}
+      <p> <a href = "/order/{{ book.id }}"> order </a> </p>
+    {% endif %}
+    {% if user.is_authenticated %}
+      <form class="feedback-section" action="" method="post">
+          {% csrf_token %}
+          <p> {{ form.text }} </p>
+          <p> <input type="submit" value="Publish"> </p>
+      </form>
+    {% endif %}
+    {% for comment in comments %}
+      <p> {{comment.user }}: {{ comment.text }} </p>
+    {% endfor %}
+  </body>
+</html>
