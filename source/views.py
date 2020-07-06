@@ -100,3 +100,36 @@ def publish(request):
         return redirect("/")
     form = UploadBookForm()
     return render(request, 'source/publish.html', {'form': form})
+
+
+def order(request, book_id):
+    order = Interested()
+    order.user = request.user
+    order.book = Book.objects.get(id=book_id)
+    order.save()
+    owner = Book.objects.get(id=book_id).owner_id
+    print(owner)
+    print(request.user)
+    if owner == User.objects.get(username=request.user).id:
+        return render(request, "source/orderfail.html", {})
+    else:
+        email = User.objects.get(id=owner).email
+        telegram = UserInfo.objects.get(user_id=owner).telegram_alias
+        messenger = UserInfo.objects.get(user_id=owner).messenger_alias
+        return render(request, "source/contact.html", {'email': email, 'telegram': telegram, 'messenger': messenger})
+
+
+def recommended(request):
+    user_id = User.objects.get(username=request.user).id
+    orders = Interested.objects.filter(user_id=user_id)
+    types = []
+    for order in orders:
+        type = Book.objects.get(id=order.book_id).type
+        if type not in types:
+            types.append(type)
+    rec_books = []
+    for type in types:
+         books = Book.objects.filter(type=type)
+         for book in books:
+             rec_books.append(book)
+    return render(request, 'source/recommended.html', {'books': rec_books})

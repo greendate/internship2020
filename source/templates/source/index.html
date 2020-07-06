@@ -20,6 +20,9 @@
       <p> {{ book.price }}$ </p>
       <p> Published by: {{ book.owner }} </p>
       <p> {{ book.description }} </p>
+      {% if user.is_authenticated %}
+        <p> <a href = "/order/{{ book.id }}"> order </a> </p>
+      {% endif %}
       <hr>
     {% endfor %}
   </body>

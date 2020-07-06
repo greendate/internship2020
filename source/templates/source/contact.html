@@ -1,0 +1,14 @@
+{% load static %}
+<html>
+  <head>
+    <title> internship </title>
+  </head>
+  <body>
+    <h1> Owner Contact </h1>
+    {% if user.is_authenticated %}
+      <p> email: {{ email }} </p>
+      <p> telegram: {{ telegram }} </p>
+      <p> messenger: {{ messenger }} </p>
+    {% endif %}
+  </body>
+</html>
