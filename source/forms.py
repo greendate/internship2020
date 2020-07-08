@@ -45,7 +45,7 @@ class UploadBookForm(forms.ModelForm):
         widgets = {
             'name': TextInput(attrs={'id': 'name', 'placeholder': 'Book Title'}),
             'author': TextInput(attrs={'id': 'author', 'placeholder': 'Author'}),
-            'cover': TextInput(attrs={'id': 'cover_url', 'placeholder': 'https://'}),
+            'cover': TextInput(attrs={'id': 'cover_url', 'placeholder': 'https://sample-cover.jpg'}),
             'price': NumberInput(attrs={'id': 'price', 'step': "0.1"}),
             'description': Textarea(attrs={'id': 'description', 'placeholder': 'Short description..'}),
         }
