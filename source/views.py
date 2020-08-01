@@ -51,6 +51,29 @@ def index(request):
     return render(request, 'source/index.html', {'books': books, 'types': types})
 
 
+def search(request):
+    if request.method == 'POST':
+         author = request.POST.get('authors')
+         print(author)
+         books = Book.objects.filter(author=author)
+         print(books)
+         books1 = Book.objects.all()
+         authors = []
+         for book in books1:
+             if not book.author in authors:
+                 authors.append(book.author)
+         authors.sort()
+         return render(request, 'source/search.html', {'books': books, 'authors': authors})
+    books = Book.objects.all()
+    authors = []
+    for book in books:
+        if not book.author in authors:
+            authors.append(book.author)
+    authors.sort()
+    print(authors)
+    return render(request, 'source/search.html', {'books': books, 'authors': authors})
+
+
 def edit(request):
     if request.method == 'POST':
         user_inst = UserInfo()
